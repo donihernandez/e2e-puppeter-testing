@@ -23,19 +23,19 @@ describe('Histogram Date Range test', () => {
 
 		const parsedData = JSON.parse(data)
 
-		console.log(parsedData)
-
 		const date = await page.evaluate(() => {
 			const data = document.querySelector('div.slick-slide.slick-active .top-section')
+			console.log({ month: data.children[0].innerText, year: data.children[1].innerText })
 			return { month: data.children[0].innerText, year: data.children[1].innerText }
 		})
 
 		const month = moment().month(date.month).format('MM')
 		const currentDate = `${date.year}-${month}`
-		const currentParseDate = moment(currentDate).format('YYYY-MM')
+		const currentParseDate = moment(currentDate).format('YYYY-MM-DD')
 
-		console.log(currentParseDate)
+		const checkRange = moment(currentParseDate).isSameOrBefore(parsedData.dateRange.start)
+		expect(checkRange).to.equal(true)
 
-		// await browser.close()
+		await browser.close()
 	});
 });
