@@ -10,7 +10,6 @@ describe('Histogram Date Range test', () => {
 
 			await page.goto('https://vs-prod.airtrfx.com/en-us/flights-from-orlando-to-manchester',
 				{ waitUntil: 'networkidle0', timeout: 0 })
-		// await page.goto('http://localhost:8000')
 
 		const response = await page.waitForResponse(res => {
 			if (res.url() === 'https://openair-california.airtrfx.com/airfare-sputnik-service/v3/vs/fares/histogram'
